@@ -150,7 +150,7 @@ const Contacts = () => {
                 <span className="text-2xl group-hover:scale-125 transition-transform duration-300">📞</span>
                 <div>
                   <p className="font-bold text-blue-100 uppercase text-xs tracking-widest mb-1">Телефон</p>
-                  <p className="font-medium hover:text-blue-400 transition-colors">+38 (050) 123-45-67</p>
+                  <p className="font-medium hover:text-blue-400 transition-colors">+38 (095) 566-15-00</p>
                 </div>
               </div>
 

@@ -37,7 +37,7 @@ const Footer = () => {
             </p>
             <p className="flex items-center gap-3">
               <span className="text-blue-500">📞</span> 
-              +38 (050) 123-45-67
+              +38 (095) 566-15-00
             </p>
             <p className="flex items-center gap-3">
               <span className="text-blue-500">✉️</span> 
