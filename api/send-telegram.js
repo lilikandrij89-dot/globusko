@@ -1,46 +1,56 @@
 export default async function handler(req, res) {
-  // 1. Дозволяємо лише POST запити
+  // 1. Дозволяємо лише POST
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+    return res.status(405).json({ message: 'Method not allowed' });
   }
 
   try {
-    const { name, phone, message } = req.body;
-    const token = process.env.TELEGRAM_TOKEN;
-    const chatId = process.env.TELEGRAM_CHAT_ID;
+    // 2. Гарантуємо, що дані розпарсено (важливо для Node.js на Vercel)
+    const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
+    const { name, phone, message } = body;
 
-    // Перевірка, чи завантажилися змінні
-    if (!token || !chatId) {
-      throw new Error('Telegram tokens are missing in environment variables');
+    const TOKEN = process.env.TELEGRAM_TOKEN;
+    const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
+
+    // 3. Перевірка наявності ключів
+    if (!TOKEN || !CHAT_ID) {
+      console.error("Помилка: Токени не знайдені в ENV");
+      return res.status(500).json({ message: 'Server configuration error' });
+    }
+
+    // 4. Перевірка обов'язкових полів від юзера
+    if (!name || !phone) {
+      return res.status(400).json({ message: "Ім'я та телефон обов'язкові" });
     }
 
     const text = `
-🚀 <b>Нова заявка з сайту!</b>
+🌟 <b>Нова заявка з сайту!</b>
 👤 <b>Ім'я:</b> ${name}
 📞 <b>Телефон:</b> ${phone}
-💬 <b>Повідомлення:</b> ${message || '—'}
+💬 <b>Питання:</b> ${message || '—'}
     `.trim();
 
-    // 2. Відправляємо запит до Telegram
-    const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+    // 5. Відправка в Telegram
+    const response = await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        chat_id: chatId,
+        chat_id: CHAT_ID,
         text: text,
         parse_mode: 'HTML',
       }),
     });
 
-    const data = await response.json();
+    const result = await response.json();
 
     if (response.ok) {
       return res.status(200).json({ success: true });
     } else {
-      return res.status(response.status).json({ error: data.description });
+      console.error("Telegram API Error:", result);
+      return res.status(500).json({ message: result.description });
     }
   } catch (error) {
-    console.error('Server Error:', error);
-    return res.status(500).json({ error: error.message });
+    console.error("Global Server Error:", error);
+    return res.status(500).json({ message: error.message });
   }
 }
