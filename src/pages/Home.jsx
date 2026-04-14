@@ -2,11 +2,10 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import mainImage from '../assets/images/main.png';
+import FAQ from '../components/FAQ'; 
 
 const Home = ({ onContactClick }) => {
   const navigate = useNavigate();
-
-  // Визначаємо мобільний пристрій (ширина < 768px)
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
   return (
@@ -18,7 +17,7 @@ const Home = ({ onContactClick }) => {
       className="overflow-x-hidden"
     >
       
-      {/* 1. HERO SECTION — На ПК з'являється миттєво без затримок */}
+      {/* 1. HERO SECTION */}
       <section className="relative min-h-[500px] md:min-h-[650px] flex items-center px-4 sm:px-6 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
@@ -59,7 +58,7 @@ const Home = ({ onContactClick }) => {
         </div>
       </section>
 
-      {/* 2. СТАТИСТИКА — На мобайлі швидкий каскадний ефект */}
+      {/* 2. СТАТИСТИКА */}
       <section className="py-12 md:py-20 bg-white border-b border-gray-100 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
           {[
@@ -131,7 +130,7 @@ const Home = ({ onContactClick }) => {
         </div>
       </section>
 
-      {/* 4. ЕТАПИ РОБОТИ — На ПК блоки з'являються миттєво в ряд */}
+      {/* 4. ЕТАПИ РОБОТИ */}
       <section className="py-16 md:py-24 bg-slate-50 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-black text-blue-900 mb-12" data-aos={isMobile ? "fade-up" : ""}>Шлях вашого проєкту</h2>
@@ -159,7 +158,10 @@ const Home = ({ onContactClick }) => {
         </div>
       </section>
 
-      {/* 5. CTA БЛОК */}
+      {/* 5. FAQ SECTION*/}
+      <FAQ />
+
+      {/* 6. CTA БЛОК */}
       <section className="py-12 md:py-24 px-4 sm:px-6" data-aos={isMobile ? "zoom-in" : ""}>
         <div className="max-w-6xl mx-auto bg-blue-600 rounded-[2.5rem] md:rounded-[4rem] p-10 md:p-24 text-center text-white relative overflow-hidden shadow-2xl">
           <div className="relative z-10">
