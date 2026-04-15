@@ -61,10 +61,7 @@ const Services = () => {
                   {s.desc}
                 </p>
 
-                <div className="mt-6 flex items-center text-blue-600 font-bold text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
-                  Детальніше 
-                  <span className="ml-2">→</span>
-                </div>
+
               </div>
             ))}
           </div>
