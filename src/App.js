@@ -57,17 +57,9 @@ function App() {
     const isMobile = window.innerWidth < 768;
 
     AOS.init({
-      // На ПК анімація триває 800мс, на мобілці — 400мс (швидше)
       duration: isMobile ? 400 : 800,
-      
-      // На ПК анімація спрацьовує майже одразу (offset: 0)
-      // На мобілці — коли блок на 50px зайшов у видимість
       offset: isMobile ? 50 : 0,
-      
-      // На ПК анімація запускається без затримки
-      // На мобілці можна лишити невелику, або теж прибрати
       delay: isMobile ? 50 : 0,
-      
       once: true,
       easing: 'ease-out-quad',
     });

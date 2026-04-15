@@ -4,9 +4,9 @@ import { Link, useLocation } from 'react-router-dom';
 const Navbar = ({ onContactClick }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const location = useLocation(); // Щоб знати, яка сторінка активна
+  const location = useLocation();
 
-  // Функція для закриття меню при кліку на посилання
+
   const closeMenu = () => setIsOpen(false);
 
   // Ефект для зміни стилю навбару при скролі

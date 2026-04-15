@@ -9,7 +9,7 @@ const Modal = ({ onClose }) => {
   });
 
   // Стан для візуального відображення процесу відправки
-  const [status, setStatus] = useState('idle'); // idle, loading, success, error
+  const [status, setStatus] = useState('idle');
 
   // 2. Функція для оновлення стану при вводі тексту
   const handleChange = (e) => {
@@ -31,7 +31,6 @@ const Modal = ({ onClose }) => {
 
       if (response.ok) {
         setStatus('success');
-        // Закриваємо модалку через 2 секунди після успіху, щоб юзер побачив "Дякуємо"
         setTimeout(() => {
           onClose();
         }, 2000);
